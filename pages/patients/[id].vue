@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1>Patients</h1>
+  </div>
+  <div>
     <table class="table table-striped" v-if="patients && patients.length > 0">
       <thead>
         <tr>

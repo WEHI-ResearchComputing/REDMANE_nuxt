@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1>Datasets</h1>
+  </div>
+  <div>
     <table class="table table-striped" v-if="datasets && datasets.length > 0">
       <thead>
         <tr>

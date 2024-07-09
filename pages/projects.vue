@@ -17,7 +17,9 @@
           <td>{{ project.status }}</td>
           <td>
               <nuxt-link :to="'/datasets/'+project.id">Show Datasets</nuxt-link> | 
-              <nuxt-link :to="'/patients/'+project.id">Show Patients</nuxt-link>
+              <nuxt-link :to="'/patients/'+project.id">Show Patients</nuxt-link> |
+              <nuxt-link :to="'/samples/'+project.id">Show Samples</nuxt-link> |
+              <nuxt-link :to="'/summary/'+project.id">Show Summary</nuxt-link> |
           </td>
         </tr>
       </tbody>
