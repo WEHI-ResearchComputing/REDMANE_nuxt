@@ -8,7 +8,7 @@
           <th>External Sample ID</th>
           <th>External Patient ID</th>
           <th>External Sample URL</th>
-          <th>Metadata</th>
+          <th v-for="key in metadataKeys" :key="key">{{ key }}</th>
         </tr>
       </thead>
       <tbody>
@@ -17,12 +17,8 @@
           <td>{{ sample.ext_sample_id }}</td>
           <td>{{ sample.patient.ext_patient_id }}</td>
           <td>{{ sample.ext_sample_url }}</td>
-          <td>
-            <ul>
-              <li v-for="meta in sample.metadata" :key="meta.id">
-                <strong>{{ meta.key }}:</strong> {{ meta.value }}
-              </li>
-            </ul>
+          <td v-for="key in metadataKeys" :key="key">
+            {{ getMetadataValue(sample.metadata, key) }}
           </td>
         </tr>
       </tbody>
@@ -34,7 +30,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAsyncData } from 'nuxt/app'
 
@@ -49,6 +45,23 @@ const { data: samples, error } = await useAsyncData('samples', () =>
     return res.json()
   })
 )
+
+const metadataKeys = computed(() => {
+  const keys = new Set()
+  if (samples.value) {
+    samples.value.forEach(sample => {
+      sample.metadata.forEach(meta => {
+        keys.add(meta.key)
+      })
+    })
+  }
+  return Array.from(keys)
+})
+
+const getMetadataValue = (metadata, key) => {
+  const meta = metadata.find(meta => meta.key === key)
+  return meta ? meta.value : ''
+}
 
 if (error.value) {
   console.error('Error fetching samples:', error.value)
@@ -68,16 +81,6 @@ th, td {
 
 th {
   background-color: #f2f2f2;
-}
-
-td ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-td ul li {
-  margin: 0;
 }
 </style>
 
