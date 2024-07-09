@@ -1,43 +1,81 @@
 <template>
   <div>
     <h1>Samples for Project ID: {{ projectId }}</h1>
-    <ul>
-      <li v-for="sample in samples" :key="sample.id">
-        <p>Sample ID: {{ sample.id }}</p>
-        <p>External Sample ID: {{ sample.ext_sample_id }}</p>
-        <p>External Sample URL: <a :href="sample.ext_sample_url" target="_blank">{{ sample.ext_sample_url }}</a></p>
-        <div v-if="sample.metadata.length">
-          <h4>Metadata:</h4>
-          <ul>
-            <li v-for="meta in sample.metadata" :key="meta.id">
-              {{ meta.key }}: {{ meta.value }}
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Sample ID</th>
+          <th>External Sample ID</th>
+          <th>External Sample URL</th>
+          <th>Metadata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="sample in samples" :key="sample.id">
+          <td>{{ sample.id }}</td>
+          <td>{{ sample.ext_sample_id }}</td>
+          <td><a :href="sample.ext_sample_url" target="_blank">{{ sample.ext_sample_url }}</a></td>
+          <td>
+            <ul>
+              <li v-for="meta in sample.metadata" :key="meta.id">
+                <strong>{{ meta.key }}:</strong> {{ meta.value }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div v-if="error">
+      <p>Error fetching samples: {{ error.message }}</p>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useFetch } from 'nuxt/app'
+import { useAsyncData } from 'nuxt/app'
 
 const route = useRoute()
-const projectId = parseInt(route.params.id);
+const projectId = computed(() => parseInt(route.params.id, 10))
 
+const { data: samples, error } = await useAsyncData('samples', () =>
+  fetch(`http://localhost:8888/samples/${projectId.value}?patient_id=0`).then(res => {
+    if (!res.ok) {
+      throw new Error('Network response was not ok')
+    }
+    return res.json()
+  })
+)
 
-const { data: samples, error } = useAsyncData('samples', async () => {
-  const response = await fetch(`http://localhost:8888/samples/${projectId}?patient_id=0`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-});
+if (error.value) {
+  console.error('Error fetching samples:', error.value)
+}
 </script>
 
 <style scoped>
-/* Add any necessary styles here */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+td ul li {
+  margin: 0;
+}
 </style>
 
