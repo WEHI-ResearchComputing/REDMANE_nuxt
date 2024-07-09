@@ -7,13 +7,18 @@
           <th>ID</th>
           <th>Name</th>
           <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="project in data" :key="project.id">
           <td>{{ project.id }}</td>
-          <td><nuxt-link :to="'/datasets/'+project.id">{{ project.name }}</nuxt-link></td>
+          <td>{{ project.name }}</td>
           <td>{{ project.status }}</td>
+          <td>
+              <nuxt-link :to="'/datasets/'+project.id">Show Datasets</nuxt-link> | 
+              <nuxt-link :to="'/patients/'+project.id">Show Patients</nuxt-link>
+          </td>
         </tr>
       </tbody>
     </table>
