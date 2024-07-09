@@ -18,7 +18,7 @@
           <td>
               <nuxt-link :to="'/datasets/0?project_id='+project.id">Show Datasets</nuxt-link> | 
               <nuxt-link :to="'/patients/0?project_id='+project.id">Show Patients</nuxt-link> |
-              <nuxt-link :to="'/samples/'+project.id">Show Samples</nuxt-link> |
+              <nuxt-link :to="'/samples/0?project_id='+project.id">Show Samples</nuxt-link> |
               <nuxt-link :to="'/summary/'+project.id">Show Summary</nuxt-link> |
           </td>
         </tr>

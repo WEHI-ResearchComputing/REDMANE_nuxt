@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Samples for Project ID: {{ projectId }}</h1>
+    <h1>Samples for Project ID: {{ project_id }}</h1>
     <table>
       <thead>
         <tr>
@@ -35,10 +35,11 @@ import { useRoute } from 'vue-router'
 import { useAsyncData } from 'nuxt/app'
 
 const route = useRoute()
-const projectId = computed(() => parseInt(route.params.id, 10))
+const sample_id = parseInt(route.params.id);
+const project_id = route.query.project_id;
 
 const { data: samples, error } = await useAsyncData('samples', () =>
-  fetch(`http://localhost:8888/samples/${projectId.value}?patient_id=0`).then(res => {
+  fetch(`http://localhost:8888/samples/${sample_id}?project_id=${project_id}`).then(res => {
     if (!res.ok) {
       throw new Error('Network response was not ok')
     }
