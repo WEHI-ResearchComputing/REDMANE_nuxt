@@ -12,7 +12,7 @@
       <tbody>
         <tr v-for="project in data" :key="project.id">
           <td>{{ project.id }}</td>
-          <td>{{ project.name }}</td>
+          <td><nuxt-link :to="'/datasets/'+project.id">{{ project.name }}</nuxt-link></td>
           <td>{{ project.status }}</td>
         </tr>
       </tbody>
