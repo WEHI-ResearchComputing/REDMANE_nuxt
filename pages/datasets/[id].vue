@@ -1,10 +1,20 @@
 <template>
   <div>
-    <ul v-if="datasets">
-      <li v-for="dataset in datasets" :key="dataset.id">
-        {{ dataset.name }}
-      </li>
-    </ul>
+    <table class="table table-striped" v-if="datasets && datasets.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dataset in datasets" :key="dataset.id">
+          <td>{{ dataset.id }}</td>
+          <td>{{ dataset.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p v-else-if="datasets && datasets.length === 0">No datasets found.</p>
     <p v-else>Loading...</p>
   </div>
 </template>
@@ -28,4 +38,8 @@ if (error.value) {
   console.error('Error fetching datasets:', error.value);
 }
 </script>
+
+<style scoped>
+/* Optional: Add scoped style for specific page styling */
+</style>
 
