@@ -15,7 +15,11 @@
       <tbody>
         <tr v-for="patient in patients" :key="patient.id">
           <td>{{ patient.id }}</td>
-          <td>{{ patient.ext_patient_id }}</td>
+          <td>
+                <nuxt-link :to="'/patients/view/'+patient.id+'?project_id='+project_id">
+                    {{ patient.ext_patient_id }}
+                </nuxt-link>
+          </td>
           <td>{{ patient.ext_patient_url }}</td>
           <td>{{ patient.sample_count }}</td>
         </tr>
