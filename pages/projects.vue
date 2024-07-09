@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Projects</h1>
-    <table v-if="data" border="1">
+    <table class="table" v-if="data" border="1">
       <thead>
         <tr>
           <th>ID</th>
