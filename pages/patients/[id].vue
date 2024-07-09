@@ -31,10 +31,12 @@ import { useAsyncData } from 'nuxt/app';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const projectId = parseInt(route.params.id);
+const patient_id = parseInt(route.params.id);
+const project_id = route.query.project_id;
+
 
 const { data: patients, error } = useAsyncData('patients', async () => {
-  const response = await fetch(`http://localhost:8888/patients/${projectId}`);
+  const response = await fetch(`http://localhost:8888/patients/${patient_id}?project_id=${project_id}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
