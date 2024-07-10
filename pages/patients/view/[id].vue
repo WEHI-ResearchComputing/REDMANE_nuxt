@@ -49,36 +49,36 @@
         </tbody>
       </table>
     </div>
+    <!-- this code was causing Nuxt to break -->
+    <div v-if="patients[0] && patients[0].samples.length > 0">
+
 
     <!-- Show samples as a table -->
-    <div v-if="patients[0] && patients[0].samples.length > 0">
-        <h2>Samples</h2>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Sample ID</th>
-              <th>External Sample ID</th>
-              <th>External Sample URL</th>
-              <th>Metadata</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="sample in patients[0].samples" :key="sample.id">
-              <td>{{ sample.id }}</td>
-              <td>{{ sample.ext_sample_id }}</td>
-              <td>{{ sample.ext_sample_url }}</td>
-              <td>
-                <ul>
-                  <li v-for="meta in sample.metadata" :key="meta.id">
-                    {{ meta.key }}: {{ meta.value }}
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-
+    <h2>Samples</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sample ID</th>
+          <th>External Sample ID</th>
+          <th>External Sample URL</th>
+          <th>Metadata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="sample in patients[0].samples" :key="sample.id">
+          <td>{{ sample.id }}</td>
+          <td>{{ sample.ext_sample_id }}</td>
+          <td>{{ sample.ext_sample_url }}</td>
+          <td>
+            <ul>
+              <li v-for="meta in sample.metadata" :key="meta.id">
+                {{ meta.key }}: {{ meta.value }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </template>
 
 <script setup>
