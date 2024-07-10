@@ -1,10 +1,6 @@
 <template>
   <header class="header">
     <nav class="navbar">
-      <div class="navbar-brand">
-        <NuxtLink to="/projects" class="navbar-item">
-        </NuxtLink>
-      </div>
       <div class="navbar-menu">
         <div class="navbar-start">
           <NuxtLink to="/projects" class="navbar-item">Home</NuxtLink>
