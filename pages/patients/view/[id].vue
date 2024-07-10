@@ -49,9 +49,10 @@
         </tbody>
       </table>
     </div>
-    <!-- this code was causing Nuxt to break -->
-    <div v-if="patients[0] && patients[0].samples.length > 0">
 
+    <!-- this code was causing Nuxt to break
+    <div v-if="patients[0] && patients[0].samples.length > 0">
+    -->
 
     <!-- Show samples as a table -->
     <h2>Samples</h2>
