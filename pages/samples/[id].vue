@@ -14,7 +14,7 @@
       <tbody>
         <tr v-for="sample in samples" :key="sample.id">
           <td>{{ sample.id }}</td>
-          <td>{{ sample.ext_sample_id }}</td>
+          <td><nuxt-link :to="'/samples/view/'+sample.id+'?project_id='+project_id">{{ sample.ext_sample_id }}</nuxt-link></td>
           <td><nuxt-link :to="'/patients/view/'+sample.patient_id+'?project_id='+project_id">{{ sample.patient.ext_patient_id }}</nuxt-link></td>
           <td>{{ sample.ext_sample_url }}</td>
           <td v-for="key in metadataKeys" :key="key">
