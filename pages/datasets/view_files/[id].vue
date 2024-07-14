@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dataset Details</h1>
+    <h1>Dataset File Details</h1>
 
     <div v-if="files && files.length > 0">
       <table class="table table-striped">
