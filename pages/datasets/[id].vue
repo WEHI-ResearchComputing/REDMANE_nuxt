@@ -8,12 +8,14 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>View Files</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="dataset in datasets" :key="dataset.id">
           <td>{{ dataset.id }}</td>
           <td><nuxt-link :to="'/datasets/view/'+dataset.id+'?project_id='+project_id">{{ dataset.name }}</nuxt-link></td>
+          <td><nuxt-link :to="'/datasets/view_files/'+dataset.id+'?project_id='+project_id">View Files</nuxt-link></td>
         </tr>
       </tbody>
     </table>
