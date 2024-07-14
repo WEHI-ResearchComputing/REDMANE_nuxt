@@ -18,7 +18,7 @@
             <td>{{ file.id }}</td>
             <td>{{ file.path }}</td>
             <td>{{ file.sample_id }}</td>
-            <td>{{ file.ext_sample_id }}</td>
+            <td><nuxt-link :to="'/samples/view/'+file.sample_id+'?project_id='+projectId">{{ file.ext_sample_id }}</nuxt-link></td>
             <td v-for="key in allMetadataKeys" :key="key">
               {{ getMetadataValue(file, key) }}
             </td>
