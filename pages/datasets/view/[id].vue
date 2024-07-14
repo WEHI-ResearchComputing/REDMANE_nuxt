@@ -21,7 +21,7 @@
           </tr>
         </tbody>
       </table>
-      <nuxt-link :to="'/datasets/view_files/'+dataset.id+'?project_id='+project_id">View Files</nuxt-link>
+      <nuxt-link :to="'/datasets/view_files/'+dataset.id+'?project_id='+dataset.project_id">View Files</nuxt-link>
     </div>
     <p v-else>Loading...</p>
   </div>
